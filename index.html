@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Havilah Hiddekel — Communications for the Technology Ecosystem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark-red: #700208;
+    --red: #81181f;
+    --vivid-red: #b70610;
+    --vivid-red-2: #de1111;
+    --light-red: #fbf3f4;
+    --black: #000002;
+    --white: #ffffff;
+    --gold: #c8a96e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px;
+    height: 80px;
+    background: rgba(0,0,2,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(112,2,8,0.4);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 14px; text-decoration: none;
+  }
+
+  .logo-mark {
+    width: 48px; height: 48px;
+    background: var(--dark-red);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    /* Placeholder for real logo — swap with <img> later */
+  }
+  .logo-mark span {
+    color: var(--white);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .logo-text {
+    display: flex; flex-direction: column; line-height: 1.1;
+  }
+  .logo-text strong {
+    color: var(--white);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .logo-text em {
+    color: rgba(251,243,244,0.55);
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px; font-weight: 300;
+    letter-spacing: 3px; text-transform: uppercase; font-style: normal;
+  }
+
+  .nav-links { display: flex; align-items: center; gap: 36px; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 12px; font-weight: 400; letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color .25s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--dark-red) !important;
+    color: var(--white) !important;
+    padding: 10px 24px !important;
+    border-radius: 2px;
+    letter-spacing: 2px !important;
+    transition: background .25s !important;
+  }
+  .nav-cta:hover { background: var(--vivid-red) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100vh; min-height: 700px;
+    display: flex; align-items: flex-end;
+    overflow: hidden;
+  }
+
+  /* Background image placeholder — client replaces background-image URL */
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #1a0002 0%, #3d0106 40%, #700208 100%);
+    /* CLIENT: replace the line above with:
+       background-image: url('your-image.jpg');
+       background-size: cover;
+       background-position: center;
+    */
+  }
+
+  /* Dark overlay to keep text readable over any image */
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0,0,2,0.90) 0%,
+      rgba(0,0,2,0.55) 50%,
+      rgba(112,2,8,0.25) 100%
+    );
+  }
+
+  /* Decorative diagonal accent */
+  .hero-accent {
+    position: absolute;
+    top: 0; right: 0;
+    width: 38%;
+    height: 100%;
+    background: linear-gradient(160deg, rgba(183,6,16,0.18) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 60px 90px;
+    max-width: 860px;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow-line {
+    width: 40px; height: 1px; background: var(--vivid-red);
+  }
+  .hero-eyebrow span {
+    color: rgba(251,243,244,0.65);
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase; font-weight: 400;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(46px, 6.5vw, 88px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.08;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: rgba(222,17,17,0.9);
+  }
+
+  .hero-sub {
+    color: rgba(251,243,244,0.70);
+    font-size: 16px; font-weight: 300; line-height: 1.75;
+    max-width: 560px;
+    margin-bottom: 44px;
+    letter-spacing: 0.2px;
+  }
+
+  .hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--dark-red);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 12px; font-weight: 500; letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 2px;
+    transition: background .3s, transform .2s;
+  }
+  .btn-primary:hover { background: var(--vivid-red); transform: translateY(-2px); }
+
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 12px; font-weight: 400; letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    transition: color .25s, border-color .25s;
+  }
+  .btn-outline:hover { color: var(--white); border-color: var(--white); }
+  .btn-outline svg { transition: transform .25s; }
+  .btn-outline:hover svg { transform: translateX(4px); }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--dark-red);
+    overflow: hidden;
+    height: 42px;
+    display: flex; align-items: center;
+  }
+  .ticker-inner {
+    display: flex;
+    animation: ticker-scroll 30s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker-item {
+    color: rgba(255,255,255,0.85);
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    padding: 0 48px;
+    display: flex; align-items: center; gap: 48px;
+  }
+  .ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.4); }
+  @keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── PURPOSE STRIP ── */
+  .purpose {
+    background: var(--black);
+    padding: 90px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .purpose-left {}
+  .purpose-label {
+    display: inline-flex; align-items: center; gap: 12px; margin-bottom: 28px;
+  }
+  .purpose-label-line { width: 32px; height: 1px; background: var(--dark-red); }
+  .purpose-label span {
+    color: var(--dark-red);
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+  }
+
+  .purpose h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 28px;
+  }
+  .purpose h2 em { font-style: italic; color: rgba(183,6,16,0.9); }
+
+  .purpose-right p {
+    color: rgba(251,243,244,0.65);
+    font-size: 16px; line-height: 1.9; font-weight: 300;
+    margin-bottom: 24px;
+  }
+  .purpose-right p:last-child { margin-bottom: 0; }
+
+  /* ── PILLARS ── */
+  .pillars {
+    background: var(--light-red);
+    padding: 100px 60px;
+  }
+  .section-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 70px;
+  }
+  .section-label {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+  }
+  .section-label-line { width: 32px; height: 1px; background: var(--dark-red); }
+  .section-label span {
+    color: var(--dark-red);
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 4vw, 54px);
+    font-weight: 300;
+    color: var(--black);
+    line-height: 1.15;
+  }
+  .section-title em { font-style: italic; color: var(--dark-red); }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .pillar-card {
+    background: var(--white);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s;
+  }
+  .pillar-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--dark-red);
+    transition: height .35s ease;
+  }
+  .pillar-card:hover { transform: translateY(-4px); }
+  .pillar-card:hover::before { height: 100%; }
+
+  .pillar-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 60px; font-weight: 300;
+    color: rgba(112,2,8,0.12);
+    line-height: 1;
+    margin-bottom: 20px;
+    letter-spacing: -2px;
+  }
+
+  .pillar-icon {
+    width: 44px; height: 44px;
+    background: var(--light-red);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+  }
+  .pillar-icon svg { color: var(--dark-red); }
+
+  .pillar-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 600;
+    color: var(--black);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .pillar-card p {
+    color: rgba(0,0,2,0.6);
+    font-size: 14px; line-height: 1.8; font-weight: 300;
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    background: var(--black);
+    padding: 100px 60px;
+  }
+  .services .section-title { color: var(--white); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(112,2,8,0.25);
+    border: 1px solid rgba(112,2,8,0.25);
+  }
+
+  .service-item {
+    background: #0d0002;
+    padding: 50px 48px;
+    position: relative;
+    cursor: default;
+    transition: background .3s;
+  }
+  .service-item:hover { background: #160003; }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-weight: 400;
+    color: var(--dark-red);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .service-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 400;
+    color: var(--white);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .service-item p {
+    color: rgba(251,243,244,0.5);
+    font-size: 14px; line-height: 1.85; font-weight: 300;
+    margin-bottom: 24px;
+  }
+
+  .service-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .service-tag {
+    display: inline-block;
+    border: 1px solid rgba(112,2,8,0.5);
+    color: rgba(251,243,244,0.5);
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 1px;
+    transition: border-color .25s, color .25s;
+  }
+  .service-item:hover .service-tag { border-color: rgba(183,6,16,0.5); color: rgba(251,243,244,0.7); }
+
+  /* ── CUSTOMERS ── */
+  .customers {
+    background: var(--white);
+    padding: 100px 60px;
+  }
+
+  .customers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+  }
+
+  .customer-card {
+    border: 1px solid rgba(112,2,8,0.15);
+    padding: 40px 32px;
+    transition: border-color .3s, box-shadow .3s;
+  }
+  .customer-card:hover {
+    border-color: var(--dark-red);
+    box-shadow: 0 8px 40px rgba(112,2,8,0.08);
+  }
+
+  .customer-icon {
+    width: 52px; height: 52px;
+    background: var(--light-red);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 22px;
+  }
+  .customer-icon svg { color: var(--dark-red); width: 22px; height: 22px; }
+
+  .customer-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 600;
+    color: var(--black);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .customer-card p {
+    color: rgba(0,0,2,0.55);
+    font-size: 13px; line-height: 1.75; font-weight: 300;
+  }
+
+  /* ── WHY SECTION ── */
+  .why {
+    background: var(--dark-red);
+    padding: 100px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .why::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.07);
+    pointer-events: none;
+  }
+  .why::after {
+    content: '';
+    position: absolute;
+    top: 40px; right: 40px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.05);
+    pointer-events: none;
+  }
+
+  .why .section-label span { color: rgba(255,255,255,0.6); }
+  .why .section-label-line { background: rgba(255,255,255,0.4); }
+  .why .section-title { color: var(--white); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 60px;
+  }
+
+  .why-points { display: flex; flex-direction: column; gap: 0; }
+  .why-point {
+    display: flex; gap: 20px;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+  }
+  .why-point:last-child { border-bottom: none; }
+
+  .why-point-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; font-weight: 400;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 2px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .why-point p {
+    color: rgba(255,255,255,0.8);
+    font-size: 15px; line-height: 1.7; font-weight: 300;
+  }
+
+  .why-right {
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .why-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 3.5vw, 48px);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.35;
+    margin-bottom: 32px;
+  }
+  .why-quote-author {
+    color: rgba(255,255,255,0.45);
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+  }
+
+  /* ── APPROACH ── */
+  .approach {
+    background: var(--light-red);
+    padding: 100px 60px;
+  }
+
+  .approach-inner {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .approach-left {}
+  .approach-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: rgba(112,2,8,0.1);
+  }
+
+  .approach-point {
+    background: var(--white);
+    padding: 36px 32px;
+    transition: background .25s;
+  }
+  .approach-point:hover { background: var(--light-red); }
+
+  .approach-point-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    color: var(--dark-red);
+    margin-bottom: 14px;
+    line-height: 1;
+  }
+  .approach-point h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 600;
+    color: var(--black);
+    margin-bottom: 10px;
+  }
+  .approach-point p {
+    color: rgba(0,0,2,0.55);
+    font-size: 13px; line-height: 1.75; font-weight: 300;
+  }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: var(--black);
+    padding: 110px 60px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 60px;
+    align-items: center;
+    border-top: 1px solid rgba(112,2,8,0.3);
+  }
+
+  .cta-banner h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 5vw, 68px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.1;
+  }
+  .cta-banner h2 em { font-style: italic; color: var(--vivid-red); }
+
+  .cta-banner p {
+    color: rgba(251,243,244,0.55);
+    font-size: 16px; line-height: 1.75; font-weight: 300;
+    margin-top: 20px;
+    max-width: 540px;
+  }
+
+  .cta-right { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+  .cta-right .btn-primary { white-space: nowrap; }
+  .cta-contact {
+    color: rgba(251,243,244,0.4);
+    font-size: 12px; letter-spacing: 1px;
+  }
+  .cta-contact a { color: rgba(251,243,244,0.7); text-decoration: none; }
+  .cta-contact a:hover { color: var(--white); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080001;
+    padding: 60px 60px 40px;
+    border-top: 1px solid rgba(112,2,8,0.2);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+
+  .footer-brand .logo-mark { margin-bottom: 20px; }
+  .footer-brand p {
+    color: rgba(251,243,244,0.4);
+    font-size: 13px; line-height: 1.8; font-weight: 300;
+    margin-top: 14px;
+    max-width: 260px;
+  }
+
+  .footer-col h4 {
+    color: rgba(255,255,255,0.5);
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul li a {
+    color: rgba(251,243,244,0.35);
+    text-decoration: none;
+    font-size: 13px; font-weight: 300;
+    transition: color .25s;
+  }
+  .footer-col ul li a:hover { color: rgba(251,243,244,0.75); }
+
+  .footer-bottom {
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-bottom p {
+    color: rgba(255,255,255,0.2);
+    font-size: 11px; letter-spacing: 1px;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    nav { padding: 0 32px; }
+    .hero-content { padding: 0 32px 70px; }
+    .purpose, .pillars, .services, .customers, .why, .approach, .cta-banner { padding: 70px 32px; }
+    footer { padding: 50px 32px 30px; }
+    .pillars-grid { grid-template-columns: 1fr 1fr; }
+    .customers-grid { grid-template-columns: repeat(2, 1fr); }
+    .cta-banner { grid-template-columns: 1fr; gap: 40px; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .approach-inner { grid-template-columns: 1fr; gap: 50px; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero-content { padding: 0 20px 60px; }
+    .purpose, .pillars, .services, .customers, .why, .approach, .cta-banner { padding: 60px 20px; }
+    footer { padding: 50px 20px 30px; }
+    .purpose { grid-template-columns: 1fr; gap: 40px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .customers-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; gap: 40px; }
+    .approach-right { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-mark">
+      <!-- Replace with <img src="your-logo.png" width="48" height="48"> -->
+      <span>H</span>
+    </div>
+    <div class="logo-text">
+      <strong>Havilah Hiddekel</strong>
+      <em>Strategic Communications</em>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#who-we-serve">Who We Serve</a>
+    <a href="#approach">Our Approach</a>
+    <a href="#contact" class="nav-cta">Partner With Us</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <!--
+      CLIENT INSTRUCTIONS:
+      Replace this div's background with your chosen image.
+      In the CSS .hero-bg rule, add:
+        background-image: url('your-image.jpg');
+        background-size: cover;
+        background-position: center;
+      The dark overlay (.hero-overlay) will keep all text readable.
+    -->
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-accent"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>Strategic PR &amp; Communications</span>
+    </div>
+    <h1>
+      Communicating the<br>
+      <em>Future</em> of Technology<br>
+      Ecosystems.
+    </h1>
+    <p class="hero-sub">
+      We operate at the intersection of technology, policy, industry, and societal impact — helping organizations communicate complex ideas with clarity, credibility, and influence.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Partner With Us</a>
+      <a href="#services" class="btn-outline">
+        Explore Our Services
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <!-- duplicated for seamless loop -->
+    <div class="ticker-item">Strategic Communications <span class="ticker-dot"></span> Technology Ecosystems <span class="ticker-dot"></span> Policy Advocacy <span class="ticker-dot"></span> Public Relations <span class="ticker-dot"></span> Brand Identity <span class="ticker-dot"></span> Executive Positioning <span class="ticker-dot"></span> Thought Leadership <span class="ticker-dot"></span> Digital Strategy <span class="ticker-dot"></span></div>
+    <div class="ticker-item">Strategic Communications <span class="ticker-dot"></span> Technology Ecosystems <span class="ticker-dot"></span> Policy Advocacy <span class="ticker-dot"></span> Public Relations <span class="ticker-dot"></span> Brand Identity <span class="ticker-dot"></span> Executive Positioning <span class="ticker-dot"></span> Thought Leadership <span class="ticker-dot"></span> Digital Strategy <span class="ticker-dot"></span></div>
+  </div>
+</div>
+
+<!-- PURPOSE -->
+<section class="purpose" id="about">
+  <div class="purpose-left fade-up">
+    <div class="purpose-label">
+      <div class="purpose-label-line"></div>
+      <span>Our Purpose</span>
+    </div>
+    <h2>Communication is<br><em>infrastructure</em><br>for innovation.</h2>
+  </div>
+  <div class="purpose-right fade-up">
+    <p>Havilah Hiddekel is a strategic Public Relations and Communications firm specializing in the technology ecosystem and its interconnected stakeholders — operating at the intersection of technology, policy, industry, and societal impact.</p>
+    <p>When policies are clearly communicated, adoption improves. When technology is understood, trust grows. When ecosystems communicate effectively, innovation scales.</p>
+    <p>We bridge the gap between technical innovation and human understanding — helping organizations communicate complex ideas with clarity, credibility, and lasting influence.</p>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars" id="pillars">
+  <div class="section-header">
+    <div>
+      <div class="section-label">
+        <div class="section-label-line"></div>
+        <span>What We Do</span>
+      </div>
+      <h2 class="section-title">Our <em>Core</em> Capabilities</h2>
+    </div>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar-card fade-up">
+      <div class="pillar-number">01</div>
+      <h3>Strategic Communications Advisory</h3>
+      <p>Executive-level communication strategy aligned with organizational objectives, stakeholder expectations, and ecosystem positioning — from messaging architecture to narrative design.</p>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="pillar-number">02</div>
+      <h3>Public Relations &amp; Media Engagement</h3>
+      <p>Building visibility, credibility, and influence through structured media relations, thought leadership, editorial placement, and industry positioning.</p>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="pillar-number">03</div>
+      <h3>Policy &amp; Ecosystem Communications</h3>
+      <p>Specialized support for organizations navigating regulatory and multi-stakeholder environments, including government engagement and public education campaigns.</p>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="pillar-number">04</div>
+      <h3>Brand &amp; Institutional Identity</h3>
+      <p>Designing coherent communication systems that reflect organizational vision and authority — corporate brand kits, institutional profiles, and storytelling frameworks.</p>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="pillar-number">05</div>
+      <h3>Event &amp; Thought Leadership</h3>
+      <p>Positioning conferences, summits, and initiatives as platforms for influence — from event communication strategy and speaker positioning to post-event narrative amplification.</p>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="pillar-number">06</div>
+      <h3>Digital &amp; Content Strategy</h3>
+      <p>Creating structured digital communication ecosystems that sustain long-term engagement through social media strategy, editorial calendars, and data-driven storytelling.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES DETAIL -->
+<section class="services" id="services">
+  <div class="section-header" style="margin-bottom:60px;">
+    <div>
+      <div class="section-label">
+        <div class="section-label-line" style="background:rgba(112,2,8,0.6);"></div>
+        <span style="color:rgba(251,243,244,0.5);">Our Services</span>
+      </div>
+      <h2 class="section-title">Built for <em>Decision-Makers</em></h2>
+    </div>
+  </div>
+  <div class="services-grid">
+    <div class="service-item fade-up">
+      <span class="service-num">01 —</span>
+      <h3>Strategic Communications Advisory</h3>
+      <p>Executive-level communication strategy developed with precision, aligning organizational objectives with stakeholder expectations and ecosystem positioning.</p>
+      <div class="service-tags">
+        <span class="service-tag">Communication Strategy</span>
+        <span class="service-tag">Messaging Architecture</span>
+        <span class="service-tag">Executive Positioning</span>
+        <span class="service-tag">Stakeholder Narratives</span>
+      </div>
+    </div>
+    <div class="service-item fade-up">
+      <span class="service-num">02 —</span>
+      <h3>Public Relations &amp; Media Engagement</h3>
+      <p>Structured media relations, editorial placement, and industry positioning to build sustained visibility and credibility in the markets that matter.</p>
+      <div class="service-tags">
+        <span class="service-tag">Media Strategy</span>
+        <span class="service-tag">Press Releases</span>
+        <span class="service-tag">Executive Profiling</span>
+        <span class="service-tag">Industry Positioning</span>
+      </div>
+    </div>
+    <div class="service-item fade-up">
+      <span class="service-num">03 —</span>
+      <h3>Policy &amp; Ecosystem Communications</h3>
+      <p>Specialized communication support for navigating regulatory environments, engaging government stakeholders, and educating public audiences on policy.</p>
+      <div class="service-tags">
+        <span class="service-tag">Policy Frameworks</span>
+        <span class="service-tag">Government Engagement</span>
+        <span class="service-tag">Ecosystem Mapping</span>
+        <span class="service-tag">Public Education</span>
+      </div>
+    </div>
+    <div class="service-item fade-up">
+      <span class="service-num">04 —</span>
+      <h3>Brand &amp; Institutional Identity</h3>
+      <p>Coherent communication systems that reflect organizational vision and authority — from brand kits and profiles to communication guidelines and institutional storytelling.</p>
+      <div class="service-tags">
+        <span class="service-tag">Corporate Brand Kits</span>
+        <span class="service-tag">Org Profiles</span>
+        <span class="service-tag">Comm Guidelines</span>
+        <span class="service-tag">Institutional Story</span>
+      </div>
+    </div>
+    <div class="service-item fade-up">
+      <span class="service-num">05 —</span>
+      <h3>Event &amp; Thought Leadership Comms</h3>
+      <p>Transform conferences, summits, and key initiatives into platforms for influence, with content development and post-event narrative amplification.</p>
+      <div class="service-tags">
+        <span class="service-tag">Event Strategy</span>
+        <span class="service-tag">Speaker Positioning</span>
+        <span class="service-tag">Content Development</span>
+        <span class="service-tag">Post-Event Amplification</span>
+      </div>
+    </div>
+    <div class="service-item fade-up">
+      <span class="service-num">06 —</span>
+      <h3>Digital &amp; Content Strategy</h3>
+      <p>Sustained digital engagement through structured social media strategies, editorial calendars, executive content development, and data-driven storytelling.</p>
+      <div class="service-tags">
+        <span class="service-tag">Social Media Strategy</span>
+        <span class="service-tag">Editorial Calendars</span>
+        <span class="service-tag">Executive Content</span>
+        <span class="service-tag">Data Storytelling</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section class="customers" id="who-we-serve">
+  <div class="section-label">
+    <div class="section-label-line"></div>
+    <span>Who We Serve</span>
+  </div>
+  <h2 class="section-title" style="margin-top:14px;">Serving the <em>Full</em> Ecosystem</h2>
+  <div class="customers-grid">
+    <div class="customer-card fade-up">
+      <div class="customer-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 21h18M9 21V7l3-4 3 4v14M9 12h6M12 7v5"/>
+        </svg>
+      </div>
+      <h3>Government &amp; Policymakers</h3>
+      <p>Ministries, regulatory bodies, public sector leadership, and national agencies shaping digital policy and technology governance frameworks.</p>
+    </div>
+    <div class="customer-card fade-up">
+      <div class="customer-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+        </svg>
+      </div>
+      <h3>Technology Companies</h3>
+      <p>Fintech, Agri-tech, EdTech, digital infrastructure providers, cybersecurity, and data-driven enterprises seeking trusted positioning.</p>
+    </div>
+    <div class="customer-card fade-up">
+      <div class="customer-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="9"/><path d="M12 3v9l4 4"/>
+        </svg>
+      </div>
+      <h3>Sector Organizations</h3>
+      <p>Financial institutions, agricultural organizations, education and healthcare bodies communicating technology-driven transformation journeys.</p>
+    </div>
+    <div class="customer-card fade-up">
+      <div class="customer-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <h3>Sustainability &amp; Impact Organizations</h3>
+      <p>Climate initiatives, SDG-aligned organizations, social innovation enterprises, and development partners amplifying impact narratives.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY HAVILAH HIDDEKEL -->
+<section class="why">
+  <div class="section-label">
+    <div class="section-label-line"></div>
+    <span>Why Havilah Hiddekel</span>
+  </div>
+  <h2 class="section-title" style="margin-top:14px;color:var(--white);">What Sets Us <em>Apart</em></h2>
+  <div class="why-grid">
+    <div class="why-points">
+      <div class="why-point fade-up">
+        <span class="why-point-num">01</span>
+        <p>Deep specialization in technology ecosystems and the policy environments that shape them.</p>
+      </div>
+      <div class="why-point fade-up">
+        <span class="why-point-num">02</span>
+        <p>Extensive experience working with government institutions and sector leadership at the highest levels.</p>
+      </div>
+      <div class="why-point fade-up">
+        <span class="why-point-num">03</span>
+        <p>The rare ability to translate complex technical and policy concepts into compelling strategic narratives.</p>
+      </div>
+      <div class="why-point fade-up">
+        <span class="why-point-num">04</span>
+        <p>Cross-sector understanding spanning innovation, governance, and sustainability — not just media visibility.</p>
+      </div>
+      <div class="why-point fade-up">
+        <span class="why-point-num">05</span>
+        <p>Communications designed for decision-makers, not just audiences — built for influence, not just awareness.</p>
+      </div>
+    </div>
+    <div class="why-right fade-up">
+      <p class="why-quote">"The organizations that lead tomorrow will be those that communicate clearly today."</p>
+      <p class="why-quote-author">— Havilah Hiddekel</p>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+  <div class="approach-inner">
+    <div class="approach-left">
+      <div class="section-label">
+        <div class="section-label-line"></div>
+        <span>Our Approach</span>
+      </div>
+      <h2 class="section-title" style="margin-top:14px; font-size:clamp(30px,3.5vw,48px);">
+        Communication as<br><em>Strategic</em> Infrastructure.
+      </h2>
+      <p style="color:rgba(0,0,2,0.55); font-size:15px; line-height:1.8; font-weight:300; margin-top:24px;">
+        We do not treat communication as publicity. Our methodology is grounded in evidence, guided by stakeholder intelligence, and shaped for long-term reputation building.
+      </p>
+    </div>
+    <div class="approach-right">
+      <div class="approach-point fade-up">
+        <div class="approach-point-icon">◎</div>
+        <h4>Stakeholder Intelligence</h4>
+        <p>We map the ecosystem before we speak — understanding who holds influence, who needs convincing, and what they care about.</p>
+      </div>
+      <div class="approach-point fade-up">
+        <div class="approach-point-icon">◈</div>
+        <h4>Ecosystem Awareness</h4>
+        <p>Technology does not operate in isolation. Our communications reflect the intersecting dynamics of policy, market, and society.</p>
+      </div>
+      <div class="approach-point fade-up">
+        <div class="approach-point-icon">◇</div>
+        <h4>Policy Sensitivity</h4>
+        <p>We navigate regulatory environments with care, ensuring communications align with governance realities and compliance needs.</p>
+      </div>
+      <div class="approach-point fade-up">
+        <div class="approach-point-icon">◉</div>
+        <h4>Evidence-Based Messaging</h4>
+        <p>Every narrative we build is grounded in data, credible sources, and verifiable claims that withstand scrutiny.</p>
+      </div>
+      <div class="approach-point fade-up">
+        <div class="approach-point-icon">◆</div>
+        <h4>Long-Term Reputation</h4>
+        <p>We build trust over time, not just visibility in the moment — positioning clients for sustained ecosystem leadership.</p>
+      </div>
+      <div class="approach-point fade-up">
+        <div class="approach-point-icon">◐</div>
+        <h4>Influence by Design</h4>
+        <p>Every message is crafted for the people who make decisions — not just the audiences who listen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner" id="contact">
+  <div>
+    <h2>Partner with us to<br>communicate innovation with<br><em>clarity and influence.</em></h2>
+    <p>Whether you are shaping policy, building technology, or driving impact through innovation — we partner with you to ensure your message reaches the stakeholders who matter.</p>
+  </div>
+  <div class="cta-right">
+    <a href="mailto:Info@havilahhiddekel.com" class="btn-primary">Get In Touch</a>
+    <p class="cta-contact">
+      <a href="mailto:Info@havilahhiddekel.com">Info@havilahhiddekel.com</a><br>
+      <a href="tel:+254797809521">0797 809 521</a>
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo-mark"><span>H</span></div>
+      <div class="logo-text" style="margin-top:4px;">
+        <strong style="color:rgba(255,255,255,0.7);">Havilah Hiddekel</strong>
+        <em style="color:rgba(255,255,255,0.3);">Strategic Communications</em>
+      </div>
+      <p>Communicating the Future of Technology Ecosystems. Serving Regional and Global Ecosystems.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Strategic Communications</a></li>
+        <li><a href="#services">Public Relations</a></li>
+        <li><a href="#services">Policy Communications</a></li>
+        <li><a href="#services">Brand Identity</a></li>
+        <li><a href="#services">Digital Strategy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Who We Serve</h4>
+      <ul>
+        <li><a href="#who-we-serve">Government &amp; Policy</a></li>
+        <li><a href="#who-we-serve">Technology Companies</a></li>
+        <li><a href="#who-we-serve">Sector Organizations</a></li>
+        <li><a href="#who-we-serve">Sustainability Bodies</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:Info@havilahhiddekel.com">Info@havilahhiddekel.com</a></li>
+        <li><a href="tel:+254797809521">0797 809 521</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Havilah Hiddekel. All rights reserved.</p>
+    <p>Communications for the Technology Ecosystem.</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
